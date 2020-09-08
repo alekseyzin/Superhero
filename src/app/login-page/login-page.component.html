@@ -1,22 +1,43 @@
-<form class="card auth-form">
+<form class="card auth-form" [formGroup]="form" (ngSubmit)="sabmit()">
   <h2>Login page</h2>
 
-  <div class="form-control">
+  <div
+    *ngIf="message"
+    class="alert alert-danger">
+    {{message}}
+  </div>
+
+  <div
+    [ngClass]="{invalid : form.get('email').touched && form.get('email').invalid}"
+    class="form-control">
     <label for="email">Email:</label>
-    <input id="email" type="email">
-    <div class="validation">
-      <small>error</small>
+    <input id="email" type="email" formControlName="email">
+    <div
+      *ngIf="form.get('email').touched && form.get('email').invalid"
+      class="validation">
+      <small *ngIf="form.get('email').errors.required">Email is empty.</small>
     </div>
   </div>
 
-  <div class="form-control">
+  <div
+    [ngClass]="{invalid : form.get('password').touched && form.get('password').invalid}"
+    class="form-control">
     <label for="password">Password:</label>
-    <input id="password" type="password">
-    <div class="validation">
-      <small>error</small>
+    <input id="password" type="password" formControlName="password">
+    <div
+      *ngIf="form.get('password').touched && form.get('password').invalid"
+      class="validation">
+      <small *ngIf="form.get('password').errors.required">Password is empty</small>
     </div>
   </div>
-
-  <button type="submit" class="btn btn-success">Sing in</button>
-  <button type="submit" class="btn btn-light" (click)="goToPostsPage()">Create new account</button>
+  <button
+    [disabled]="form.invalid || submitted"
+    type="submit"
+    class="btn btn-success"
+  >Sing in</button>
+  <button
+    type="submit"
+    class="btn btn-dark"
+    (click)="goToPostsPage()"
+  >Create new account</button>
 </form>

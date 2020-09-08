@@ -1,5 +1,10 @@
 <nav class="navbar main">
   <h1><a [routerLink]="['/']">SuperHero</a></h1>
+  <a [routerLink]="['/posts']">Posts</a>
+  <div>
+    <a [routerLink]="['/login']">Sing in</a>
+    <button class="btn btn-dark sing-out" (click)="logout()">Sing out</button>
+  </div>
 </nav>
 
 <div class="container">
