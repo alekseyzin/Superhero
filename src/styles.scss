@@ -108,6 +108,18 @@ img {
   color: #fff;
 }
 
+.alert {
+  padding: 0.7rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: var(--light-color);
+  color: #333;
+}
+
+//.alert-danger {
+//  background: var(--danger-color);
+//}
+
 .form-control {
   display: block;
   color: #888;
@@ -164,7 +176,7 @@ button {
   margin-bottom: 1rem;
 
   &.main {
-    justify-content: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--dark-color);
   }
 }

@@ -1,4 +1,5 @@
 import {FormControl} from '@angular/forms';
+import {PasswordUniqErrors} from './interfaces';
 
 interface Validator {
   [key: string]: boolean
@@ -27,7 +28,6 @@ export class FormValidators {
   }
 
   static checkEmailDomain(control: FormControl): Validator {
-
     if (FormValidators.isValidEmailDomain(control)) {
       return {isInvalidEmailDomain: true};
     }
@@ -43,7 +43,7 @@ export class FormValidators {
   }
 
   static checkDotsLimit(control: FormControl): Validator {
-    const dotsLimitReg = new RegExp(/^([a-z]*\.)?([a-z]*\.)?([a-z]*\.)?[a-z]*@/);
+    const dotsLimitReg = new RegExp(/^(\w*\.)?(\w*\.)?(\w*\.)?\w*@/);
 
     if (!dotsLimitReg.test(control.value)) {
       return {isInvalidDotsLimit: true};
@@ -62,7 +62,8 @@ export class FormValidators {
     return null;
   }
 
-  static checkPasswordUniq(control: FormControl): any {
+  static checkPasswordUniq(control: FormControl): PasswordUniqErrors | null {
+    let errors: PasswordUniqErrors | null = {}
     const email = control.parent?.controls.email.value
     const name = control.parent?.controls.name.value
     let isIncludesName = false
@@ -73,8 +74,10 @@ export class FormValidators {
         isIncludesName = isIncludesName ? true : control.value.toLowerCase().includes(name.toLowerCase())
       })
     }
+    if (isIncludesEmail) errors.isIncludesEmail = true
+    if (isIncludesName) errors.isIncludesName = true
 
-    return {isIncludesEmail, isIncludesName}
+    return (JSON.stringify(errors) === "{}") ? null : errors
   }
 
   static getNameLikeArray(name: string): Array<string> {
@@ -87,3 +90,5 @@ export class FormValidators {
     }
   }
 }
+
+

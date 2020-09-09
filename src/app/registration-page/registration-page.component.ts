@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../shared/interfaces';
+import {UserCreate} from '../shared/interfaces';
 import {FormValidators} from '../shared/formValidators';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -12,7 +13,7 @@ export class RegistrationPageComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -40,14 +41,15 @@ export class RegistrationPageComponent implements OnInit {
 
   submit(): void {
     if (this.form.invalid) {
-      console.log(this.form)
       return
     }
 
-    const user: User = {
+    const user: UserCreate = {
       name: this.form.value.name,
       email: this.form.value.email,
       password: this.form.value.password
     }
+
+    this.auth.registration(user)
   }
 }
