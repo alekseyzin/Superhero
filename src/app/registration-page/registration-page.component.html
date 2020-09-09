@@ -1,0 +1,86 @@
+<form class="card auth-form" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Create New User</h2>
+
+  <div
+    [ngClass]="{invalid : form.get('name').touched && form.get('name').invalid}"
+    class="form-control">
+    <label for="name">Name:</label>
+    <input id="name" type="text" formControlName="name">
+    <div
+      *ngIf="form.get('name').touched && form.get('name').invalid"
+      class="validation">
+      <small *ngIf="form.get('name').errors.required">
+        Name is empty.
+      </small>
+      <small *ngIf="form.get('name').errors.minlength">
+          Name must be {{form.get('name').errors.minlength.actualLength}}.
+          Now {{form.get('name').errors.minlength.requiredLength}}.
+      </small>
+      <small
+        *ngIf="form.get('name').errors.isMissingLetters"
+      >Special symbols disallow</small>
+      <small *ngIf="form.get('name').errors.isInvalidNameCase">
+        Should contain two words, Kebab-Case, CamelCase, Space Case.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-control"
+    [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
+  >
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email">
+    <div
+      *ngIf="form.get('email').touched && form.get('email').invalid"
+      class="validation">
+      <small *ngIf="form.get('email').errors.required">
+        Email is empty.
+      </small>
+      <small
+        *ngIf="form.get('email').errors.isInvalidDotsLimit"
+      >
+        No more 3 dots before @.
+      </small>
+      <small
+        *ngIf="form.get('email').errors.isInvalidEmailDomain"
+      >
+        Supports only (.com, .net, .org, .co, .us) domains, only 5 symbols after @.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-control"
+    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+  >
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+    <div
+      *ngIf="form.get('password').touched && form.get('password').invalid"
+      class="validation">
+      <small
+        *ngIf="form.get('password').errors.required"
+      >Password is empty.</small>
+      <small *ngIf="form.get('password').errors.minlength">
+        Password must be {{form.get('password').errors.minlength.actualLength}}.
+        Now {{form.get('password').errors.minlength.requiredLength}}.
+      </small>
+      <small *ngIf="form.get('password').errors.isInvalidPasswordFormat">
+        Should contain at least one uppercase letter, one number, one special symbol($ % . & ! -)
+      </small>
+      <small
+        *ngIf="form.get('password').errors.isIncludesEmail"
+      >The password contains part of Email</small>
+      <small
+        *ngIf="form.get('password').errors.isIncludesName"
+      >The password contains part of Name</small>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-success"
+
+  >Create account</button>
+</form>
+
+<!--[disabled]="form.invalid"-->

@@ -1,0 +1,22 @@
+<form class="card auth-form">
+  <h2>Login page</h2>
+
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input id="email" type="email">
+    <div class="validation">
+      <small>error</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="password">Password:</label>
+    <input id="password" type="password">
+    <div class="validation">
+      <small>error</small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">Sing in</button>
+  <button type="submit" class="btn btn-light" (click)="goToPostsPage()">Create new account</button>
+</form>
