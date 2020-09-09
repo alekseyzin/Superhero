@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-control">
+    <input type="text" formControlName="search">
+    <div
+      *ngIf="isInvalidInput('search')"
+      class="validation"
+    >
+      <small *ngIf="form.get('search').errors.required">
+        Search is empty.
+      </small>
+      <small *ngIf="form.get('search').errors.isInvalidSearch">
+        Only letters allowed. Without wrapping spaces.
+      </small>
+    </div>
+  </div>
+  <button [disabled]="form.invalid" class="bth-search">
+    <i class="fas fa-search"></i>
+  </button>
+</form>
+

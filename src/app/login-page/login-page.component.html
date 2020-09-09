@@ -7,27 +7,23 @@
     {{message}}
   </div>
 
-  <div
-    [ngClass]="{invalid : form.get('email').touched && form.get('email').invalid}"
-    class="form-control">
+  <div class="form-control">
     <label for="email">Email:</label>
     <input id="email" type="email" formControlName="email">
     <div
-      *ngIf="form.get('email').touched && form.get('email').invalid"
+      *ngIf="isInvalidInput('email')"
       class="validation">
-      <small *ngIf="form.get('email').errors.required">Email is empty.</small>
+      <small *ngIf="isInputEmpty('email')">Email is empty.</small>
     </div>
   </div>
 
-  <div
-    [ngClass]="{invalid : form.get('password').touched && form.get('password').invalid}"
-    class="form-control">
+  <div class="form-control">
     <label for="password">Password:</label>
     <input id="password" type="password" formControlName="password">
     <div
-      *ngIf="form.get('password').touched && form.get('password').invalid"
+      *ngIf="isInvalidInput('password')"
       class="validation">
-      <small *ngIf="form.get('password').errors.required">Password is empty</small>
+      <small *ngIf="isInputEmpty('password')">Password is empty</small>
     </div>
   </div>
   <button
@@ -36,8 +32,7 @@
     class="btn btn-success"
   >Sing in</button>
   <button
-    type="submit"
     class="btn btn-dark"
-    (click)="goToPostsPage()"
+    (click)="goRegistrationPage()"
   >Create new account</button>
 </form>

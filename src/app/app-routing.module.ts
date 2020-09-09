@@ -4,13 +4,13 @@ import {MainLayoutComponent} from './shared/components/main-layout/main-layout.c
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
 import {AuthGuard} from './shared/services/auth.guard';
-import {PostsPageComponent} from './posts-page/posts-page.component';
+import {HeroesPageComponent} from './heroes-page/heroes-page.component';
 
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/login', pathMatch: 'full'},
-      {path: 'posts', component: PostsPageComponent, canActivate: [AuthGuard]},
+      {path: 'heroes', component: HeroesPageComponent, canActivate: [AuthGuard]},
       {path: 'login', component: LoginPageComponent},
       {path: 'reg', component: RegistrationPageComponent}
     ]

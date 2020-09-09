@@ -13,10 +13,14 @@ export class RegistrationPageComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private auth: AuthService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.initializationForm()
+  }
+
+  initializationForm(): void {
     this.form = new FormGroup({
         name: new FormControl(null, [
           Validators.required,
@@ -44,12 +48,20 @@ export class RegistrationPageComponent implements OnInit {
       return
     }
 
-    const user: UserCreate = {
-      name: this.form.value.name,
-      email: this.form.value.email,
-      password: this.form.value.password
-    }
+    const user: UserCreate = {...this.form.value}
 
-    this.auth.registration(user)
+    this.authService.registration(user)
+  }
+
+  isInvalidInput(inputName: string): boolean {
+    return this.form.get(inputName).touched && this.form.get(inputName).invalid
+  }
+
+  isInputEmpty(inputName: string): boolean {
+    return this.form.get(inputName).errors.required
+  }
+
+  isShortLengthInput(inputName: string): boolean {
+    return this.form.get(inputName).errors.minlength
   }
 }

@@ -1,0 +1,22 @@
+.heroes-card {
+  display: flex;
+  border: 1px solid black;
+
+  .avatar-wrapper {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+  }
+
+  .content-wrapper {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+
+  .options-wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+}

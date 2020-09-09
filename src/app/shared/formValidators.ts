@@ -89,6 +89,16 @@ export class FormValidators {
       return  name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(' ')
     }
   }
+
+  static checkSearchInput(control: FormControl): Validator {
+    const onlyLettersReg = new RegExp(/^[a-zA-Z\s-]+[a-zA-Z]$/);
+
+    if (!onlyLettersReg.test(control.value)) {
+      return {isInvalidSearch: true};
+    }
+
+    return null;
+  }
 }
 
 

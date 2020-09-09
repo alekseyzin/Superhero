@@ -1,39 +1,35 @@
 <form class="card auth-form" [formGroup]="form" (ngSubmit)="submit()">
   <h2>Create New User</h2>
 
-  <div
-    [ngClass]="{invalid : form.get('name').touched && form.get('name').invalid}"
-    class="form-control">
+  <div class="form-control">
     <label for="name">Name:</label>
     <input id="name" type="text" formControlName="name">
     <div
-      *ngIf="form.get('name').touched && form.get('name').invalid"
+      *ngIf="isInvalidInput('name')"
       class="validation">
-      <small *ngIf="form.get('name').errors.required">
+      <small *ngIf="isInputEmpty('name')">
         Name is empty.
       </small>
-      <small *ngIf="form.get('name').errors.minlength">
+      <small *ngIf="isShortLengthInput('name')">
           Name must be {{form.get('name').errors.minlength.actualLength}}.
           Now {{form.get('name').errors.minlength.requiredLength}}.
       </small>
-      <small
-        *ngIf="form.get('name').errors.isMissingLetters"
-      >Special symbols disallow</small>
+      <small *ngIf="form.get('name').errors.isMissingLetters">
+        Special symbols disallow
+      </small>
       <small *ngIf="form.get('name').errors.isInvalidNameCase">
         Should contain two words, Kebab-Case, CamelCase, Space Case.
       </small>
     </div>
   </div>
 
-  <div class="form-control"
-    [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
-  >
+  <div class="form-control">
     <label for="email">Email:</label>
     <input id="email" type="email" formControlName="email">
     <div
-      *ngIf="form.get('email').touched && form.get('email').invalid"
+      *ngIf="isInvalidInput('email')"
       class="validation">
-      <small *ngIf="form.get('email').errors.required">
+      <small *ngIf="isInputEmpty('email')">
         Email is empty.
       </small>
       <small
@@ -49,18 +45,16 @@
     </div>
   </div>
 
-  <div class="form-control"
-    [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
-  >
+  <div class="form-control">
     <label for="password">Password:</label>
     <input id="password" type="password" formControlName="password">
     <div
-      *ngIf="form.get('password').touched && form.get('password').invalid"
+      *ngIf="isInvalidInput('password')"
       class="validation">
       <small
-        *ngIf="form.get('password').errors.required"
+        *ngIf="isInputEmpty('password')"
       >Password is empty.</small>
-      <small *ngIf="form.get('password').errors.minlength">
+      <small *ngIf="isShortLengthInput('password')">
         Password must be {{form.get('password').errors.minlength.actualLength}}.
         Now {{form.get('password').errors.minlength.requiredLength}}.
       </small>
