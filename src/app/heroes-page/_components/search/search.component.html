@@ -13,7 +13,7 @@
       </small>
     </div>
   </div>
-  <button [disabled]="form.invalid" class="bth-search">
+  <button [disabled]="form.invalid || isFetching" class="bth-search">
     <i class="fas fa-search"></i>
   </button>
 </form>

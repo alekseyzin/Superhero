@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HeroesService} from '../../../shared/services/heroes.service';
 
 @Component({
   selector: 'app-recent-search',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(public heroesService: HeroesService) { }
 
   ngOnInit(): void {
+    this.heroesService.getRecentSearches()
   }
 
+  search(searchElem: MouseEvent): void {
+    const searchVal = (<HTMLElement> searchElem.target).innerText
+    this.heroesService.search(searchVal).subscribe()
+  }
 }

@@ -6,7 +6,8 @@ import {Environment} from './interface';
 
 export const environment: Environment = {
   apiKey: '2594635517455330',
-  production: false
+  production: false,
+  shDbUrl: 'https://cors-anywhere.herokuapp.com/https://superheroapi.com/api',
 };
 
 /*
