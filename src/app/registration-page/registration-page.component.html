@@ -11,13 +11,13 @@
         Name is empty.
       </small>
       <small *ngIf="isShortLengthInput('name')">
-          Name must be {{form.get('name').errors.minlength.actualLength}}.
-          Now {{form.get('name').errors.minlength.requiredLength}}.
+          Name must be {{ form.get('name').errors.minlength.actualLength }}.
+          Now {{ form.get('name').errors.minlength.requiredLength }}.
       </small>
-      <small *ngIf="form.get('name').errors.isMissingLetters">
+      <small *ngIf="isMissingLetters('name')">
         Special symbols disallow
       </small>
-      <small *ngIf="form.get('name').errors.isInvalidNameCase">
+      <small *ngIf="isInvalidNameCase('name')">
         Should contain two words, Kebab-Case, CamelCase, Space Case.
       </small>
     </div>
@@ -33,12 +33,12 @@
         Email is empty.
       </small>
       <small
-        *ngIf="form.get('email').errors.isInvalidDotsLimit"
+        *ngIf="isInvalidDotsLimit('email')"
       >
         No more 3 dots before @.
       </small>
       <small
-        *ngIf="form.get('email').errors.isInvalidEmailDomain"
+        *ngIf="isInvalidEmailDomain('email')"
       >
         Supports only (.com, .net, .org, .co, .us) domains, only 5 symbols after @.
       </small>
@@ -55,17 +55,17 @@
         *ngIf="isInputEmpty('password')"
       >Password is empty.</small>
       <small *ngIf="isShortLengthInput('password')">
-        Password must be {{form.get('password').errors.minlength.actualLength}}.
-        Now {{form.get('password').errors.minlength.requiredLength}}.
+        Password must be {{ form.get('password').errors.minlength.actualLength }}.
+        Now {{ form.get('password').errors.minlength.requiredLength }}.
       </small>
-      <small *ngIf="form.get('password').errors.isInvalidPasswordFormat">
+      <small *ngIf="isInvalidPasswordFormat('password')">
         Should contain at least one uppercase letter, one number, one special symbol($ % . & ! -)
       </small>
       <small
-        *ngIf="form.get('password').errors.isIncludesEmail"
+        *ngIf="isIncludesEmail('password')"
       >The password contains part of Email</small>
       <small
-        *ngIf="form.get('password').errors.isIncludesName"
+        *ngIf="isIncludesName('password')"
       >The password contains part of Name</small>
     </div>
   </div>

@@ -4,7 +4,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/interfaces';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -16,8 +17,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted = false
   message: string
-  subQueryParams: Subscription
-  subLogin: Subscription
+  private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(
     private router: Router,
@@ -27,21 +27,26 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subQueryParams = this.listenOnQueryParamsUpdated()
+    this.listenOnQueryParamsUpdated()
     this.initializationForm()
   }
 
   ngOnDestroy(): void {
-    this.subQueryParams.unsubscribe()
-    this.subLogin?.unsubscribe()
+    this.componentDestroyed$.next(true)
   }
 
   listenOnQueryParamsUpdated(): Subscription {
-    return this.activatedRoute.queryParams.subscribe((params: Params) => {
+    const subscr = this.activatedRoute.queryParams
+      .pipe(
+        takeUntil(this.componentDestroyed$)
+      )
+      .subscribe((params: Params) => {
       if (params['loginAgain']) {
         this.message = 'Your current session has expired. Please login again to continue using this app!'
       }
     })
+
+    return subscr
   }
 
   initializationForm(): void {
@@ -64,9 +69,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
     const user: User = {...this.form.value};
 
-    this.subLogin = this.authService.login(user).subscribe((val) => {
-      this.form.reset();
-      this.router.navigate(['/heroes'])
+    this.authService.login(user)
+      .pipe(
+        takeUntil(this.componentDestroyed$)
+      )
+      .subscribe((val) => {
+        this.form.reset();
+        this.router.navigate(['/heroes'])
     });
 
     this.submitted = false

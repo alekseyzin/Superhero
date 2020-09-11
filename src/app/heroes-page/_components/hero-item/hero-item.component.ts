@@ -8,10 +8,10 @@ import {HeroesService} from '../../../shared/services/heroes.service';
   styleUrls: ['./hero-item.component.scss']
 })
 export class HeroItemComponent implements OnInit {
+  @Input() hero: Hero
 
   isFavorite = false
 
-  @Input() hero: Hero
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {

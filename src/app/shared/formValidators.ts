@@ -81,13 +81,17 @@ export class FormValidators {
   }
 
   static getNameLikeArray(name: string): Array<string> {
+    let nameSplit: string[]
+
     if (name.includes('-')) {
-      return name.split('-');
+      nameSplit = name.split('-');
     } else if (name.trim().includes(' ')) {
-      return name.trim().split(' ')
+      nameSplit = name.trim().split(' ')
     } else {
-      return  name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(' ')
+      nameSplit = name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(' ')
     }
+
+    return  nameSplit
   }
 
   static checkSearchInput(control: FormControl): Validator {

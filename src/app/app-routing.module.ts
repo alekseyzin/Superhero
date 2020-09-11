@@ -5,6 +5,7 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
 import {AuthGuard} from './shared/guards/auth.guard';
 import {HeroesPageComponent} from './heroes-page/heroes-page.component';
+import {UserInfoComponent} from './user-info/user-info.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
       {path: '', redirectTo: '/login', pathMatch: 'full'},
       {path: 'heroes', component: HeroesPageComponent, canActivate: [AuthGuard]},
       {path: 'login', component: LoginPageComponent},
-      {path: 'reg', component: RegistrationPageComponent}
+      {path: 'reg', component: RegistrationPageComponent},
+      {path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]}
     ]
   }
 ];

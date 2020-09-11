@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormValidators} from '../../../shared/formValidators';
 import {HeroesService} from '../../../shared/services/heroes.service';
-import {Subject, Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -13,8 +13,8 @@ import {takeUntil} from 'rxjs/operators';
 export class SearchComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
-  private componentDestroyed$: Subject<boolean> = new Subject()
   isFetching = false
+  private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(private heroesService: HeroesService) {
   }
@@ -36,7 +36,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit() {
+  submit(): void {
     if (this.form.invalid) {
       return;
     }
@@ -50,10 +50,16 @@ export class SearchComponent implements OnInit, OnDestroy {
         takeUntil(this.componentDestroyed$)
       )
       .subscribe( response => {
-        (response.response === 'success') && this.heroesService.addToRecentSearch(search)
-        this.heroesService.getRecentSearches()
-        this.isFetching = false
+        this.handlerRecentSearch(response.response, search)
       });
+  }
+
+  handlerRecentSearch(response: string, search: string): void {
+    if (response === 'success') {
+      this.heroesService.addToRecentSearch(search)
+    }
+    this.heroesService.getRecentSearches()
+    this.isFetching = false
   }
 
   isInvalidInput(inputName: string): boolean {

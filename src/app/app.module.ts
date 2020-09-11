@@ -15,6 +15,9 @@ import { HeroItemComponent } from './heroes-page/_components/hero-item/hero-item
 import { RecentSearchComponent } from './heroes-page/_components/recent-search/recent-search.component';
 import { SearchComponent } from './heroes-page/_components/search/search.component';
 import { AlphabetComponent } from './heroes-page/_components/alphabet/alphabet.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { HistoryTabComponent } from './user-info/_components/history-tab/history-tab.component';
+import { PowerTabComponent } from './user-info/_components/power-tab/power-tab.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { AlphabetComponent } from './heroes-page/_components/alphabet/alphabet.c
     HeroItemComponent,
     RecentSearchComponent,
     SearchComponent,
-    AlphabetComponent
+    AlphabetComponent,
+    UserInfoComponent,
+    HistoryTabComponent,
+    PowerTabComponent
   ],
   imports: [
     BrowserModule,

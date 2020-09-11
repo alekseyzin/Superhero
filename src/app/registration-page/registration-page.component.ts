@@ -44,13 +44,11 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   submit(): void {
-    if (this.form.invalid) {
-      return
+    if (!this.form.invalid) {
+      const user: UserCreate = {...this.form.value}
+
+      this.authService.registration(user)
     }
-
-    const user: UserCreate = {...this.form.value}
-
-    this.authService.registration(user)
   }
 
   isInvalidInput(inputName: string): boolean {
@@ -63,5 +61,33 @@ export class RegistrationPageComponent implements OnInit {
 
   isShortLengthInput(inputName: string): boolean {
     return this.form.get(inputName).errors.minlength
+  }
+
+  isMissingLetters(inputName: string): boolean {
+    return this.form.get(inputName).errors.isMissingLetters
+  }
+
+  isInvalidNameCase(inputName: string): boolean {
+    return this.form.get(inputName).errors.isInvalidNameCase
+  }
+
+  isInvalidDotsLimit(inputName: string): boolean {
+    return this.form.get(inputName).errors.isInvalidDotsLimit
+  }
+
+  isInvalidEmailDomain(inputName: string): boolean {
+    return this.form.get(inputName).errors.isInvalidEmailDomain
+  }
+
+  isInvalidPasswordFormat(inputName: string): boolean {
+    return this.form.get(inputName).errors.isInvalidPasswordFormat
+  }
+
+  isIncludesEmail(inputName: string): boolean {
+    return this.form.get(inputName).errors.isIncludesEmail
+  }
+
+  isIncludesName(inputName: string): boolean {
+    return this.form.get(inputName).errors.isIncludesName
   }
 }
