@@ -1,1 +1,14 @@
-<button class="alphabet-select">A</button>
+<button
+  (click)="toggleModal()"
+  class="alphabet-select"
+>{{currentLetter}}</button>
+<div
+  *ngIf="modalOpen"
+  class="modal-wrapper"
+>
+  <a
+    class="letter"
+    *ngFor="let letter of alphabetUrls"
+    (click)="searchByLetter($event)"
+  >{{letter}}</a>
+</div>
