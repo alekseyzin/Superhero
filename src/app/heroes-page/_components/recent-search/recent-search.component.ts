@@ -15,7 +15,7 @@ export class RecentSearchComponent implements OnInit {
     this.heroesService.getRecentSearches()
   }
 
-  search(searchElem): void {
-    this.onRecentSearch.emit(searchElem)
+  search(search: string): void {
+    this.onRecentSearch.emit(search)
   }
 }

@@ -2,10 +2,18 @@
   display: flex;
   border: 1px solid black;
 
+  &.lastHero {
+    background-color: #28a745;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 5px;
+    width: 953px;
+  }
+
   .avatar-wrapper {
     background-color: red;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 
     img {
       max-width: 100%;
@@ -19,6 +27,17 @@
     display: flex;
     justify-content: space-between;
     width: 80%;
+
+    .stats {
+      max-height: 100px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      p {
+        margin-right: 20px;
+      }
+    }
   }
 
   .options-wrapper {

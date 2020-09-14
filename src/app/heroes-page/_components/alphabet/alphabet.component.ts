@@ -21,8 +21,10 @@ export class AlphabetComponent implements OnInit {
 
   setAlphabet(): void {
     const alphabetUrls = []
+    const charCodeA = 97;
+    const charCodeZ = 122;
 
-    for(let charCode = 97; charCode <= 122; charCode++) {
+    for(let charCode = charCodeA; charCode <= charCodeZ; charCode++) {
       const letter = String.fromCharCode(charCode)
 
       alphabetUrls.push(letter)
@@ -34,7 +36,7 @@ export class AlphabetComponent implements OnInit {
     this.modalOpen = !this.modalOpen
   }
 
-  searchByLetter(searchLetter): void {
+  searchByLetter(searchLetter: string): void {
     this.onAlphabetSearch.emit(searchLetter)
     this.currentLetter = searchLetter.toLocaleUpperCase()
     this.toggleModal()

@@ -88,7 +88,8 @@ export class FormValidators {
     } else if (name.trim().includes(' ')) {
       nameSplit = name.trim().split(' ')
     } else {
-      nameSplit = name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(' ')
+      const camelCaseReg = new RegExp(/([a-z])([A-Z])/g);
+      nameSplit = name.replace(camelCaseReg, '$1 $2').toLowerCase().split(' ')
     }
 
     return  nameSplit

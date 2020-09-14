@@ -4,6 +4,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 import {Hero} from '../interfaces';
 import {ViewApiUrl} from './api';
+import {logger} from 'codelyzer/util/logger';
 
 @Injectable({providedIn: 'root'})
 export class HeroesService implements OnDestroy{
@@ -11,6 +12,7 @@ export class HeroesService implements OnDestroy{
   heroes: Hero[]
   recentSearches: string[] | null = null
   favoriteHeroes: Hero[] = []
+
   private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(private http: HttpClient) {
@@ -29,38 +31,17 @@ export class HeroesService implements OnDestroy{
       )
   }
 
-  getFavoriteHero(id: string): Observable<any> {
-    return this.http.get(`${ViewApiUrl.getBaseUrl()}/${id}`)
-      .pipe(
-        tap(
-          hero => {
-            this.favoriteHeroes.push(hero)
-          }
-        )
-      )
-  }
-
-  getAllFavoriteHeroes(): void {
-    const idHeroes = this.getFavorites()
-
-    this.favoriteHeroes = []
-
-    if (idHeroes) {
-      idHeroes.forEach( id => this.getFavoriteHero(id)
-        .pipe(takeUntil(this.componentDestroyed$))
-        .subscribe()
-      )
+  setFavoriteHeroes(): void {
+    if (this.isFavorites()) {
+      this.favoriteHeroes = JSON.parse(localStorage.favorites)
     }
-
   }
 
   addToRecentSearch(searchValue: string): void {
-    if (sessionStorage.recentSearches) {
-      if (!this.isDuplicatedSearch(searchValue)) {
-        sessionStorage.setItem('recentSearches', `${sessionStorage.recentSearches + '/' + searchValue}`)
-      }
-    } else {
+    if (!sessionStorage.recentSearches) {
       sessionStorage.setItem('recentSearches', `${searchValue}`)
+    } else if (!this.isDuplicatedSearch(searchValue)) {
+      sessionStorage.setItem('recentSearches', `${sessionStorage.recentSearches + '/' + searchValue}`)
     }
   }
 
@@ -74,23 +55,40 @@ export class HeroesService implements OnDestroy{
     }
   }
 
-  addToFavorites(id: string): void {
-    if (localStorage.favorites) {
-      localStorage.favorites = JSON.stringify([...JSON.parse(localStorage.favorites), id])
+  addToFavorites(hero: Hero): void {
+    const heroData: Hero = {
+      id: hero.id,
+      name: hero.name,
+      image: hero.image,
+      powerstats: hero.powerstats
+    }
+
+    if (this.isFavorites()) {
+      localStorage.favorites = JSON.stringify([...JSON.parse(localStorage.favorites), heroData])
     } else {
-     localStorage.favorites = JSON.stringify([id])
+     localStorage.favorites = JSON.stringify([heroData])
     }
   }
 
   removeFromFavorites(id: string): void {
-    localStorage.favorites = JSON.stringify(JSON.parse(localStorage.favorites).filter(favorite => id !== favorite))
+    localStorage.favorites = JSON.stringify(JSON.parse(localStorage.favorites).filter(favorite => id !== favorite.id))
   }
 
-  getFavorites(): string[] | null {
-    if (localStorage.favorites?.length) {
-      return JSON.parse(localStorage.favorites)
+  getFavoritesId(): string[] | null {
+    if (this.isFavorites()) {
+      return JSON.parse(localStorage.favorites).map(heroes => heroes.id)
     }
 
     return null
+  }
+
+  getLastHeroId(): string {
+    if (this.isFavorites()) {
+      return JSON.parse(localStorage.favorites).pop().id
+    }
+  }
+
+  private isFavorites(): boolean {
+    return localStorage.favorites?.length
   }
  }

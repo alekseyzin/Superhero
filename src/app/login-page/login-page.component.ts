@@ -17,6 +17,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted = false
   message: string
+
   private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(
@@ -35,18 +36,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.componentDestroyed$.next(true)
   }
 
-  listenOnQueryParamsUpdated(): Subscription {
-    const subscr = this.activatedRoute.queryParams
+  listenOnQueryParamsUpdated(): void {
+    const message = 'Your current session has expired. Please login again to continue using this app!'
+
+    this.activatedRoute.queryParams
       .pipe(
         takeUntil(this.componentDestroyed$)
       )
       .subscribe((params: Params) => {
       if (params['loginAgain']) {
-        this.message = 'Your current session has expired. Please login again to continue using this app!'
+        this.message = message
       }
     })
-
-    return subscr
   }
 
   initializationForm(): void {
@@ -69,6 +70,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
     const user: User = {...this.form.value};
 
+    this.handlerAuth(user)
+  }
+
+  handlerAuth(user: User): void {
     this.authService.login(user)
       .pipe(
         takeUntil(this.componentDestroyed$)
@@ -76,9 +81,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       .subscribe((val) => {
         this.form.reset();
         this.router.navigate(['/heroes'])
-    });
-
-    this.submitted = false
+        this.submitted = false
+      });
   }
 
   goRegistrationPage(): void {

@@ -45,6 +45,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     const search: string = this.form.value.search;
 
+    this.handlerSearch(search)
+  }
+
+  handlerSearch(search: string): void {
     this.heroesService.search(search)
       .pipe(
         takeUntil(this.componentDestroyed$)
@@ -58,6 +62,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (response === 'success') {
       this.heroesService.addToRecentSearch(search)
     }
+
     this.heroesService.getRecentSearches()
     this.isFetching = false
   }
