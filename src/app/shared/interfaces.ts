@@ -20,6 +20,11 @@ export interface Hero {
   image: {url: string}
   powerstats: PowerStats
   appearance?: Appearance
+  biography?: Biography
+  connections?: Connections
+  work?: Work
+
+
 }
 
 interface PowerStats {
@@ -38,6 +43,26 @@ interface Appearance {
   height: string[]
   race: string
   weight: string[]
+}
+
+interface Biography {
+  aliases: string[]
+  alignment: string
+  'alter-egos': string
+  'first-appearance': string
+  'full-name': string
+  'place-of-birth': string
+  publisher: string
+}
+
+interface Connections {
+  'group-affiliation': string
+  relatives: string
+}
+
+interface Work {
+  base: string
+  occupation: string
 }
 
 export interface PowerupItem {

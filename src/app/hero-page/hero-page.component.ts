@@ -36,6 +36,7 @@ export class HeroPageComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.componentDestroyed$)
     ).subscribe( hero => {
+      console.log(hero);
       this.hero = hero
     })
   }

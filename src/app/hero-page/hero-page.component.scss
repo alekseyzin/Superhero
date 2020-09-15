@@ -13,17 +13,26 @@
     }
   }
 
-  .content {
+  .content-wrapper {
     border: 1px solid black;
     padding: 1rem;
     width: 100%;
 
     .col {
-      margin: 0 1rem;
+      margin: 0 1rem 1rem 1rem;
+
+      p {
+        margin-top: 5px;
+        span {
+          font-weight: bold;
+          margin-right: 5px;
+        }
+      }
     }
 
-    .first-block {
+    .content {
       display: flex;
+      flex-wrap: wrap;
     }
   }
 }
