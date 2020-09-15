@@ -56,6 +56,31 @@ img {
   margin: 0.7rem 0;
 }
 
+.heroes-card {
+  display: flex;
+  border: 1px solid black;
+
+  .avatar-wrapper {
+    background-color: red;
+    width: 150px;
+    height: 150px;
+    display: flex;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content-wrapper {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+  }
+}
+
 .btn {
   display: inline-block;
   background: var(--light-color);

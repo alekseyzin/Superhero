@@ -29,3 +29,11 @@ interface PowerStats {
   speed: string
   strength: string
 }
+
+export interface PowerupItem {
+  id: number
+  name: string
+  image: string
+  description: string
+  count: number
+}

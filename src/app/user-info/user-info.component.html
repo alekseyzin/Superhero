@@ -16,9 +16,7 @@
   >Power ups</a>
 </div>
 
-<div *ngIf="currentTab === 'heroes'">
-  <app-favorites-heroes></app-favorites-heroes>
-</div>
+<app-favorites-heroes *ngIf="currentTab === 'heroes'"></app-favorites-heroes>
 
 <app-history-tab *ngIf="currentTab === 'history'"></app-history-tab>
 
