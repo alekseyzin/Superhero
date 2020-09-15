@@ -33,7 +33,7 @@ export class AuthService {
     )
   }
 
-  logout():void {
+  logout(): void {
     localStorage.clear()
   }
 
@@ -48,12 +48,11 @@ export class AuthService {
     localStorage.setItem('heroToken', new Date().getTime().toString())
   }
 
-  registration (user: UserCreate): void {
+  registration(user: UserCreate): void {
     if (localStorage.users) {
-      let usersInStoradge = JSON.parse(localStorage.users)
+      const usersInStoradge = JSON.parse(localStorage.users)
 
-      usersInStoradge.push(user)
-      localStorage.setItem('users', JSON.stringify(usersInStoradge))
+      localStorage.setItem('users', JSON.stringify([...usersInStoradge, user]))
     } else {
       localStorage.setItem('users', JSON.stringify([user]))
     }

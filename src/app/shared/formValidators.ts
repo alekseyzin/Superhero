@@ -61,9 +61,9 @@ export class FormValidators {
 
     return null;
   }
-
-  static checkPasswordUniq(control: FormControl): PasswordUniqErrors | null {
-    let errors: PasswordUniqErrors | null = {}
+//пофиксить any
+  static checkPasswordUniq(control: any): PasswordUniqErrors | null {
+    const errors: PasswordUniqErrors | null = {}
     const email = control.parent?.controls.email.value
     const name = control.parent?.controls.name.value
     let isIncludesName = false
@@ -88,6 +88,16 @@ export class FormValidators {
     } else {
       return  name.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(' ')
     }
+  }
+
+  static checkSearchInput(control: FormControl): Validator {
+    const onlyLettersReg = new RegExp(/^[a-zA-Z]+$/);
+
+    if (!onlyLettersReg.test(control.value)) {
+      return {isInvalidSearch: true};
+    }
+
+    return null;
   }
 }
 

@@ -8,7 +8,13 @@ import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { PostsPageComponent } from './posts-page/posts-page.component';
+import { HeroesPageComponent } from './heroes-page/heroes-page.component';
+import { SearchBlockComponent } from './heroes-page/_components/search-block/search-block.component';
+import { HeroesListComponent } from './heroes-page/_components/heroes-list/heroes-list.component';
+import { HeroItemComponent } from './heroes-page/_components/hero-item/hero-item.component';
+import { RecentSearchComponent } from './heroes-page/_components/recent-search/recent-search.component';
+import { SearchComponent } from './heroes-page/_components/search/search.component';
+import { AlphabetComponent } from './heroes-page/_components/alphabet/alphabet.component';
 
 
 @NgModule({
@@ -17,7 +23,13 @@ import { PostsPageComponent } from './posts-page/posts-page.component';
     MainLayoutComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    PostsPageComponent
+    HeroesPageComponent,
+    SearchBlockComponent,
+    HeroesListComponent,
+    HeroItemComponent,
+    RecentSearchComponent,
+    SearchComponent,
+    AlphabetComponent
   ],
   imports: [
     BrowserModule,

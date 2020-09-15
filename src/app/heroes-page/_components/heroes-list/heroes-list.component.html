@@ -1,0 +1,9 @@
+<div
+  *ngIf="heroesService.heroes"
+  class="heroes-wrapper">
+  <h3>Results: 100</h3>
+  <app-hero-item
+  *ngFor="let hero of heroesService.heroes"
+  [hero]="hero"
+  ></app-hero-item>
+</div>

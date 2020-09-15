@@ -1,0 +1,7 @@
+<div class="resent-search">
+  <h3>Recent search</h3>
+  <p
+    *ngFor="let recentSearch of heroesService.recentSearches"
+    (click)="search($event)"
+  >{{recentSearch}}</p>
+</div>
