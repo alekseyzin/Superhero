@@ -30,8 +30,16 @@
   <tbody>
     <tr *ngFor="let historyItem of history">
       <td>{{ historyItem.date | date: 'medium' }}</td>
-      <td>{{ historyItem.hero }}</td>
-      <td>{{ historyItem.opponent }}</td>
+      <td>
+        <a [routerLink]="['/', 'hero', historyItem.heroId]">
+          {{ historyItem.hero }}
+        </a>
+      </td>
+      <td>
+        <a [routerLink]="['/', 'hero', historyItem.opponentId]">
+          {{ historyItem.opponent }}
+        </a>
+      </td>
       <td>{{ historyItem.result }}</td>
     </tr>
   </tbody>

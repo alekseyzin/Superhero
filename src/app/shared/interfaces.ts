@@ -19,6 +19,7 @@ export interface Hero {
   name: string
   image: {url: string}
   powerstats: PowerStats
+  appearance?: Appearance
 }
 
 interface PowerStats {
@@ -28,6 +29,15 @@ interface PowerStats {
   power: string
   speed: string
   strength: string
+}
+
+interface Appearance {
+  'eye-color': string
+  gender: string
+  'hair-color': string
+  height: string[]
+  race: string
+  weight: string[]
 }
 
 export interface PowerupItem {

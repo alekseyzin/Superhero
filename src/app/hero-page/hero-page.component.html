@@ -1,0 +1,28 @@
+<div class="hero-wrapper">
+  <div class="logo-wrapper">
+    <img src="{{ hero.image.url }}" alt="{{ hero.name }}">
+  </div>
+  <div class="content">
+    <h1>{{ hero.name }}</h1>
+    <div class="first-block">
+      <div class="powerstats col">
+        <h3>Powerstats:</h3>
+        <p>Combat: {{ hero.powerstats.combat }}</p>
+        <p>Durability: {{ hero.powerstats.durability }}</p>
+        <p>Intelligence: {{ hero.powerstats.intelligence }}</p>
+        <p>Power: {{ hero.powerstats.power }}</p>
+        <p>Speed: {{ hero.powerstats.speed }}</p>
+        <p>Strength: {{ hero.powerstats.strength }}</p>
+      </div>
+      <div class="appearance col">
+        <h3>Appearance</h3>
+        <p>Eye-color: {{ hero.appearance["eye-color"] }}</p>
+        <p>Gender: {{ hero.appearance.gender }}</p>
+        <p>Height: {{ hero.appearance.height[1] }}</p>
+        <p>Race: {{ hero.appearance.race }}</p>
+        <p>Hair-color: {{ hero.appearance["hair-color"] }}</p>
+        <p>Weight: {{ hero.appearance.weight[1] }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,13 +22,17 @@ export class HeroesService implements OnDestroy{
     this.componentDestroyed$.next(true)
   }
 
-  search(searchValue: string): Observable<any>{
+  search(searchValue: string): Observable<any> {
     return this.http.get(`${ViewApiUrl.getBaseUrl()}/search/${searchValue}`)
       .pipe(
         tap(heroes => {
           this.heroes = heroes.results
         })
       )
+  }
+
+  getHeroById(id: string): Observable<any> {
+    return this.http.get(`${ViewApiUrl.getBaseUrl()}/${id}`)
   }
 
   setFavoriteHeroes(): void {
