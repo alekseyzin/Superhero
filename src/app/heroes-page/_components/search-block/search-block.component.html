@@ -1,8 +1,12 @@
 <div class="search-wrapper">
   <h2>Find hero</h2>
   <div class="search">
-    <app-alphabet></app-alphabet>
+    <app-alphabet
+      (onAlphabetSearch)="search($event)"
+    ></app-alphabet>
     <app-search></app-search>
   </div>
-  <app-recent-search></app-recent-search>
+  <app-recent-search
+    (onRecentSearch)="search($event)"
+  ></app-recent-search>
 </div>

@@ -1,17 +1,23 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subscription} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {takeUntil, tap} from 'rxjs/operators';
 import {Hero} from '../interfaces';
 import {ViewApiUrl} from './api';
 
 @Injectable({providedIn: 'root'})
-export class HeroesService {
+export class HeroesService implements OnDestroy{
 
   heroes: Hero[]
-  recentSearches: Array<string> | null = null
+  recentSearches: string[] | null = null
+  favoriteHeroes: Hero[] = []
+  private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(private http: HttpClient) {
+  }
+
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next(true)
   }
 
   search(searchValue: string): Observable<any>{
@@ -19,15 +25,40 @@ export class HeroesService {
       .pipe(
         tap(heroes => {
           this.heroes = heroes.results
-          console.log(heroes)
         })
       )
   }
 
+  getFavoriteHero(id: string): Observable<any> {
+    return this.http.get(`${ViewApiUrl.getBaseUrl()}/${id}`)
+      .pipe(
+        tap(
+          hero => {
+            this.favoriteHeroes.push(hero)
+          }
+        )
+      )
+  }
+
+  getAllFavoriteHeroes(): void {
+    const idHeroes = this.getFavorites()
+
+    this.favoriteHeroes = []
+
+    if (idHeroes) {
+      idHeroes.forEach( id => this.getFavoriteHero(id)
+        .pipe(takeUntil(this.componentDestroyed$))
+        .subscribe()
+      )
+    }
+
+  }
+
   addToRecentSearch(searchValue: string): void {
     if (sessionStorage.recentSearches) {
-      !this.isDuplicatedSearch(searchValue)
-        && sessionStorage.setItem('recentSearches', `${sessionStorage.recentSearches + '/' + searchValue}`)
+      if (!this.isDuplicatedSearch(searchValue)) {
+        sessionStorage.setItem('recentSearches', `${sessionStorage.recentSearches + '/' + searchValue}`)
+      }
     } else {
       sessionStorage.setItem('recentSearches', `${searchValue}`)
     }
@@ -55,7 +86,7 @@ export class HeroesService {
     localStorage.favorites = JSON.stringify(JSON.parse(localStorage.favorites).filter(favorite => id !== favorite))
   }
 
-  getFavorites(): Array<string> | null {
+  getFavorites(): string[] | null {
     if (localStorage.favorites?.length) {
       return JSON.parse(localStorage.favorites)
     }

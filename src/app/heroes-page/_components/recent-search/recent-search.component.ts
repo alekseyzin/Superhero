@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HeroesService} from '../../../shared/services/heroes.service';
 
 @Component({
@@ -7,6 +7,7 @@ import {HeroesService} from '../../../shared/services/heroes.service';
   styleUrls: ['./recent-search.component.scss']
 })
 export class RecentSearchComponent implements OnInit {
+  @Output() onRecentSearch: EventEmitter<string> = new EventEmitter<string>()
 
   constructor(public heroesService: HeroesService) { }
 
@@ -14,8 +15,7 @@ export class RecentSearchComponent implements OnInit {
     this.heroesService.getRecentSearches()
   }
 
-  search(searchElem: MouseEvent): void {
-    const searchVal = (<HTMLElement> searchElem.target).innerText
-    this.heroesService.search(searchVal).subscribe()
+  search(searchElem): void {
+    this.onRecentSearch.emit(searchElem)
   }
 }

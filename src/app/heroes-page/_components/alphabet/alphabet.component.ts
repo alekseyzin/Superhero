@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {ViewApiUrl} from '../../../shared/services/api';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HeroesService} from '../../../shared/services/heroes.service';
 
 @Component({
@@ -8,18 +7,19 @@ import {HeroesService} from '../../../shared/services/heroes.service';
   styleUrls: ['./alphabet.component.scss']
 })
 export class AlphabetComponent implements OnInit {
+  @Output() onAlphabetSearch: EventEmitter<string> = new EventEmitter<string>()
 
   modalOpen = false
-  alphabetUrls: Array<string>
+  alphabetUrls: string[]
   currentLetter = 'A'
 
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
-    this.getAlphabet()
+    this.setAlphabet()
   }
 
-  getAlphabet(): void {
+  setAlphabet(): void {
     const alphabetUrls = []
 
     for(let charCode = 97; charCode <= 122; charCode++) {
@@ -34,9 +34,8 @@ export class AlphabetComponent implements OnInit {
     this.modalOpen = !this.modalOpen
   }
 
-  searchByLetter($event: MouseEvent): void {
-    const searchLetter = (<HTMLElement> $event.target).innerText
-    this.heroesService.search(searchLetter).subscribe()
+  searchByLetter(searchLetter): void {
+    this.onAlphabetSearch.emit(searchLetter)
     this.currentLetter = searchLetter.toLocaleUpperCase()
     this.toggleModal()
   }
