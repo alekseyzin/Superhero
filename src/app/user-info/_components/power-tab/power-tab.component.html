@@ -1,1 +1,7 @@
 <p>power-tab works!</p>
+<div class="powerup-wrapper">
+  <app-powerup-item
+  *ngFor="let powerup of powerupItems"
+  [powerup]="powerup"
+  ></app-powerup-item>
+</div>

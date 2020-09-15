@@ -19,6 +19,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { HistoryTabComponent } from './user-info/_components/history-tab/history-tab.component';
 import { PowerTabComponent } from './user-info/_components/power-tab/power-tab.component';
 import {FavoritesHeroesComponent} from './user-info/_components/favorites-heroes/favorites-heroes.component';
+import { PowerupItemComponent } from './user-info/_components/powerup-item/powerup-item.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {FavoritesHeroesComponent} from './user-info/_components/favorites-heroes
     HistoryTabComponent,
     PowerTabComponent,
     FavoritesHeroesComponent,
+    PowerupItemComponent,
   ],
   imports: [
     BrowserModule,

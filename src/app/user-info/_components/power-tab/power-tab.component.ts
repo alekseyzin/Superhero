@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import {PowerupService} from '../../../shared/services/powerup.service';
+import {PowerupItem} from '../../../shared/interfaces';
+
 @Component({
   selector: 'app-power-tab',
   templateUrl: './power-tab.component.html',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PowerTabComponent implements OnInit {
 
-  constructor() { }
+  powerupItems: PowerupItem[]
+
+  constructor(public powerup: PowerupService) { }
 
   ngOnInit(): void {
+    this.powerupItems = this.powerup.getSortPowerupItems()
   }
 
 }
