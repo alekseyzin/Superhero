@@ -1,4 +1,6 @@
-<div class="card heroes-card">
+<div
+  [ngClass]="{disabled: isDisabled}"
+  class="card heroes-card">
   <div class="avatar-wrapper">
     <img src="{{ powerup.image }}" alt="{{ powerup.name }}">
   </div>
