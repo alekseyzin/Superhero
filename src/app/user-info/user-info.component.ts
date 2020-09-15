@@ -13,19 +13,18 @@ export class UserInfoComponent implements OnInit {
   constructor(public heroesService: HeroesService) { }
 
   ngOnInit(): void {
-    this.heroesService.getAllFavoriteHeroes()
   }
 
-  clickHero() {
+  clickHero(): void {
     this.currentTab = 'heroes'
-    this.heroesService.getAllFavoriteHeroes()
+    this.heroesService.setFavoriteHeroes()
   }
 
-  clickHistory() {
+  clickHistory(): void {
     this.currentTab = 'history'
   }
 
-  clickPower() {
+  clickPower(): void {
     this.currentTab = 'power'
   }
 }

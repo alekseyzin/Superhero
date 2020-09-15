@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from '../../../shared/interfaces';
 import {HeroesService} from '../../../shared/services/heroes.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-hero-item',
@@ -8,29 +9,38 @@ import {HeroesService} from '../../../shared/services/heroes.service';
   styleUrls: ['./hero-item.component.scss']
 })
 export class HeroItemComponent implements OnInit {
-  @Input() hero: Hero
+  @Input() hero: Hero;
 
-  isFavorite = false
+  isFavorite = false;
+  isLastHero = false;
 
-  constructor(private heroesService: HeroesService) { }
+  constructor(
+    private heroesService: HeroesService,
+    private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
-    if (this.isFavorites()) {
-      this.isFavorite = true
+    if (this.checkFavorite()) {
+      this.isFavorite = true;
+    }
+    if (this.router.url === '/user-info') {
+      this.isLastHero = (this.hero.id === this.heroesService.getLastHeroId());
     }
   }
 
   doFavorite(): void {
-    this.isFavorite = true
-    this.heroesService.addToFavorites(this.hero.id)
+    this.isFavorite = true;
+    this.heroesService.addToFavorites(this.hero);
   }
 
   doUsual(): void {
-    this.isFavorite = false
-    this.heroesService.removeFromFavorites(this.hero.id)
+    this.isFavorite = false;
+    this.heroesService.removeFromFavorites(this.hero.id);
+    this.heroesService.setFavoriteHeroes()
   }
 
-  isFavorites(): boolean {
-    return this.heroesService.getFavorites() && this.heroesService.getFavorites().includes(this.hero.id)
+  checkFavorite(): boolean {
+    return this.heroesService.getFavoritesId() && this.heroesService.getFavoritesId().includes(this.hero.id);
   }
 }
