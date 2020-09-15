@@ -37,3 +37,12 @@ export interface PowerupItem {
   description: string
   count: number
 }
+
+export interface History {
+  date: Date
+  hero: string
+  heroId: string
+  opponent: string
+  opponentId: string
+  result: 'win' | 'lose'
+}
