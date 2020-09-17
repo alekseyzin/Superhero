@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {History} from '../../../shared/interfaces';
-import {history} from './mock-history';
+import {History} from '../interfaces';
 
 @Injectable({providedIn: 'root'})
 export class HistoryService {
 
-  history: History[] = history
+  history: History[] = []
   toggleSort = true
 
   getHistory(): History[] {
@@ -24,5 +23,9 @@ export class HistoryService {
     })
 
     this.toggleSort = !this.toggleSort
+  }
+
+  logHistory(historyItem: History): void {
+    this.history.push(historyItem)
   }
 }

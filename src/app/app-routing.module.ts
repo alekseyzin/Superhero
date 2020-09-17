@@ -7,6 +7,8 @@ import {AuthGuard} from './shared/guards/auth.guard';
 import {HeroesPageComponent} from './heroes-page/heroes-page.component';
 import {UserInfoComponent} from './user-info/user-info.component';
 import {HeroPageComponent} from './hero-page/hero-page.component';
+import {BattlePageComponent} from './battle-page/battle-page.component';
+import {BattleGuard} from './shared/guards/battle.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +19,7 @@ const routes: Routes = [
       {path: 'reg', component: RegistrationPageComponent},
       {path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]},
       {path: 'hero/:id', component: HeroPageComponent, canActivate: [AuthGuard]},
+      {path: 'battle', component: BattlePageComponent, canActivate: [AuthGuard, BattleGuard]},
     ]
   }
 ];

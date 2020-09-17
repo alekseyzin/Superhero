@@ -31,8 +31,21 @@ export class HeroesService implements OnDestroy{
       )
   }
 
+  getRandomHero(): Observable<any> {
+    const randomId = this.getRandomId().toString()
+
+    return this.getHeroById(randomId)
+  }
+
   getHeroById(id: string): Observable<any> {
     return this.http.get(`${ViewApiUrl.getBaseUrl()}/${id}`)
+  }
+
+  getRandomId(): number {
+    const firstHeroId = 1
+    const lastHeroId = 731
+
+    return Math.floor(Math.random() * (lastHeroId - firstHeroId)) + firstHeroId;
   }
 
   setFavoriteHeroes(): void {
@@ -86,10 +99,20 @@ export class HeroesService implements OnDestroy{
     return null
   }
 
-  getLastHeroId(): string {
+  getLastHero(): Hero {
+    this.setFavoriteHeroes()
+
+    const lastHeroId = this.getLastHeroId()
+
+    return this.favoriteHeroes.filter(hero => hero.id === lastHeroId)[0]
+  }
+
+  getLastHeroId(): string | null {
     if (this.isFavorites()) {
       return JSON.parse(localStorage.favorites).pop().id
     }
+
+    return null
   }
 
   private isFavorites(): boolean {

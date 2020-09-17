@@ -71,6 +71,8 @@ export interface PowerupItem {
   image: string
   description: string
   count: number
+  checked: boolean
+  power: number
 }
 
 export interface History {
@@ -79,5 +81,5 @@ export interface History {
   heroId: string
   opponent: string
   opponentId: string
-  result: 'win' | 'lose'
+  result: 'won' | 'lost' | 'draw'
 }

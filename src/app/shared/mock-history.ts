@@ -1,4 +1,4 @@
-import {History} from '../../../shared/interfaces';
+import {History} from './interfaces';
 
 export const history: History[] = [
   {
@@ -7,7 +7,7 @@ export const history: History[] = [
     heroId: '7',
     opponent: 'Adam Strange',
     opponentId: '8',
-    result: 'win'
+    result: 'won'
   },
   {
     date: new Date('2020-05-01'),
@@ -15,7 +15,7 @@ export const history: History[] = [
     heroId: '21',
     opponent: 'Aquaman',
     opponentId: '38',
-    result: 'lose'
+    result: 'lost'
   },
 
 ]
