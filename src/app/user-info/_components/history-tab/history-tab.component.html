@@ -1,1 +1,46 @@
-<p>history-tab works!</p>
+<table>
+  <thead>
+    <tr>
+      <th (click)="sort('date')">
+        <span>
+          Battle date
+          <i class="fas fa-sort"></i>
+        </span>
+      </th>
+      <th (click)="sort('hero')">
+        <span>
+          Hero name
+          <i class="fas fa-sort"></i>
+        </span>
+      </th>
+      <th (click)="sort('opponent')">
+        <span>
+          Opponent name
+          <i class="fas fa-sort"></i>
+        </span>
+      </th>
+      <th (click)="sort('result')">
+        <span>
+          Battle result
+          <i class="fas fa-sort"></i>
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let historyItem of history">
+      <td>{{ historyItem.date | date: 'medium' }}</td>
+      <td>
+        <a [routerLink]="['/', 'hero', historyItem.heroId]">
+          {{ historyItem.hero }}
+        </a>
+      </td>
+      <td>
+        <a [routerLink]="['/', 'hero', historyItem.opponentId]">
+          {{ historyItem.opponent }}
+        </a>
+      </td>
+      <td>{{ historyItem.result }}</td>
+    </tr>
+  </tbody>
+</table>

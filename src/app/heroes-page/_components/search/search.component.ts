@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   isFetching = false
+
   private componentDestroyed$: Subject<boolean> = new Subject()
 
   constructor(private heroesService: HeroesService) {

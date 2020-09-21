@@ -1,4 +1,4 @@
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {PasswordUniqErrors} from './interfaces';
 
 interface Validator {
@@ -61,38 +61,52 @@ export class FormValidators {
 
     return null;
   }
-//пофиксить any
-  static checkPasswordUniq(control: any): PasswordUniqErrors | null {
-    const errors: PasswordUniqErrors | null = {}
-    const email = control.parent?.controls.email.value
-    const name = control.parent?.controls.name.value
-    let isIncludesName = false
-    const isIncludesEmail = email ? control.value?.toLowerCase().includes(email.split('@')[0].toLowerCase()) : false;
+
+  static checkUniq(inputName: string): any {
+    return function(control: any): Validator {
+      if (inputName === 'name') {
+        return {isIncludesName: FormValidators.isIncludesName(control)};
+      } else if (inputName === 'email') {
+        return {isIncludesEmail: FormValidators.includesEmail(control)};
+      }
+
+      return null;
+    };
+  }
+
+  static isIncludesName(control: any): boolean {
+    const name = control.parent?.controls.name.value;
+    let isIncludesName = false;
 
     if (name) {
-      FormValidators.getNameLikeArray(name).forEach( name => {
-        isIncludesName = isIncludesName ? true : control.value.toLowerCase().includes(name.toLowerCase())
-      })
+      FormValidators.getNameLikeArray(name).forEach((name) => {
+        isIncludesName = isIncludesName ? true : control.value.toLowerCase().includes(name.toLowerCase());
+      });
     }
-    if (isIncludesEmail) errors.isIncludesEmail = true
-    if (isIncludesName) errors.isIncludesName = true
 
-    return (JSON.stringify(errors) === "{}") ? null : errors
+    return isIncludesName;
+  }
+
+  static includesEmail(control: any): boolean {
+    const email = control.parent?.controls.email.value;
+    const isIncludesEmail = email ? control.value?.toLowerCase().includes(email.split('@')[0].toLowerCase()) : false;
+
+    return isIncludesEmail;
   }
 
   static getNameLikeArray(name: string): Array<string> {
-    let nameSplit: string[]
+    let nameSplit: string[];
 
     if (name.includes('-')) {
       nameSplit = name.split('-');
     } else if (name.trim().includes(' ')) {
-      nameSplit = name.trim().split(' ')
+      nameSplit = name.trim().split(' ');
     } else {
       const camelCaseReg = new RegExp(/([a-z])([A-Z])/g);
-      nameSplit = name.replace(camelCaseReg, '$1 $2').toLowerCase().split(' ')
+      nameSplit = name.replace(camelCaseReg, '$1 $2').toLowerCase().split(' ');
     }
 
-    return  nameSplit
+    return nameSplit;
   }
 
   static checkSearchInput(control: FormControl): Validator {

@@ -34,7 +34,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear()
+    localStorage.removeItem('expDate')
+    localStorage.removeItem('heroToken')
   }
 
   isAuthenticated(): boolean {

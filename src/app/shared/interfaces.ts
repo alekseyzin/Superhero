@@ -19,6 +19,12 @@ export interface Hero {
   name: string
   image: {url: string}
   powerstats: PowerStats
+  appearance?: Appearance
+  biography?: Biography
+  connections?: Connections
+  work?: Work
+
+
 }
 
 interface PowerStats {
@@ -30,10 +36,50 @@ interface PowerStats {
   strength: string
 }
 
+interface Appearance {
+  'eye-color': string
+  gender: string
+  'hair-color': string
+  height: string[]
+  race: string
+  weight: string[]
+}
+
+interface Biography {
+  aliases: string[]
+  alignment: string
+  'alter-egos': string
+  'first-appearance': string
+  'full-name': string
+  'place-of-birth': string
+  publisher: string
+}
+
+interface Connections {
+  'group-affiliation': string
+  relatives: string
+}
+
+interface Work {
+  base: string
+  occupation: string
+}
+
 export interface PowerupItem {
   id: number
   name: string
   image: string
   description: string
   count: number
+  checked: boolean
+  power: number
+}
+
+export interface History {
+  date: Date
+  hero: string
+  heroId: string
+  opponent: string
+  opponentId: string
+  result: 'won' | 'lost' | 'draw'
 }
