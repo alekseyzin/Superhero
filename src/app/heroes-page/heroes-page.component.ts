@@ -31,11 +31,7 @@ export class HeroesPageComponent implements OnInit, OnDestroy {
         takeUntil(this.componentDestroyed$)
       )
       .subscribe((params: Params) => {
-        if (params['notAccessToBattle']) {
-          this.notAccessToBattle = true;
-        } else {
-          this.notAccessToBattle = false;
-        }
+        this.notAccessToBattle = params['notAccessToBattle'] ? true : false
       });
   }
 

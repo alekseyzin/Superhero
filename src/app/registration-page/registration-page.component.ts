@@ -37,7 +37,6 @@ export class RegistrationPageComponent implements OnInit {
           Validators.required,
           Validators.minLength(5),
           FormValidators.checkPasswordFormat,
-          // FormValidators.checkPasswordUniq,
           FormValidators.checkUniq('name'),
           FormValidators.checkUniq('email'),
         ])

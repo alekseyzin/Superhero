@@ -14,7 +14,7 @@
        class="powerup"
        *ngFor="let powerup of powerups"
         [powerup]="powerup"
-       (click)="togglePowerup(powerup.id)"
+       (click)="selectPowerup(powerup.id)"
        [ngClass]="{checked: powerup.checked}"
      ></app-battle-powerup>
     </div>
