@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {HistoryService} from '../../../shared/services/history.service';
-import {History} from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-history-tab',
@@ -9,16 +7,9 @@ import {History} from '../../../shared/interfaces';
 })
 export class HistoryTabComponent implements OnInit {
 
-  history: History[]
-
-  constructor(public historyService: HistoryService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.history = this.historyService.getHistory()
   }
 
-  sort(property: string): void {
-    this.historyService.sortHistoryBy(property)
-    this.history = this.historyService.getHistory()
-  }
 }

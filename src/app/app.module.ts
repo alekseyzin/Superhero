@@ -20,12 +20,6 @@ import { HistoryTabComponent } from './user-info/_components/history-tab/history
 import { PowerTabComponent } from './user-info/_components/power-tab/power-tab.component';
 import {FavoritesHeroesComponent} from './user-info/_components/favorites-heroes/favorites-heroes.component';
 import { PowerupItemComponent } from './user-info/_components/powerup-item/powerup-item.component';
-import { HeroPageComponent } from './hero-page/hero-page.component';
-import { BattlePageComponent } from './battle-page/battle-page.component';
-import { WarningModalComponent } from './heroes-page/_components/warning-modal/warning-modal.component';
-import { HeroBlockComponent } from './battle-page/_components/hero-block/hero-block.component';
-import { BattlePowerupComponent } from './battle-page/_components/battle-powerup/battle-powerup.component';
-import { ResultModalComponent } from './battle-page/_components/result-modal/result-modal.component';
 
 
 @NgModule({
@@ -46,12 +40,6 @@ import { ResultModalComponent } from './battle-page/_components/result-modal/res
     PowerTabComponent,
     FavoritesHeroesComponent,
     PowerupItemComponent,
-    HeroPageComponent,
-    BattlePageComponent,
-    WarningModalComponent,
-    HeroBlockComponent,
-    BattlePowerupComponent,
-    ResultModalComponent,
   ],
   imports: [
     BrowserModule,

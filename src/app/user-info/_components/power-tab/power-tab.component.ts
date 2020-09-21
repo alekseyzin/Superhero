@@ -15,7 +15,7 @@ export class PowerTabComponent implements OnInit {
   constructor(public powerup: PowerupService) { }
 
   ngOnInit(): void {
-    this.powerupItems = this.powerup.getSortPowerups()
+    this.powerupItems = this.powerup.getSortPowerupItems()
   }
 
 }
