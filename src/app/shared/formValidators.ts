@@ -64,13 +64,12 @@ export class FormValidators {
 
   static checkUniq(inputName: string): any {
     return function(control: any): Validator {
-      if (inputName === 'name') {
-        return {isIncludesName: FormValidators.isIncludesName(control)};
-      } else if (inputName === 'email') {
-        return {isIncludesEmail: FormValidators.includesEmail(control)};
+      const validators = {
+        name: (): Validator => ({isIncludesName: FormValidators.isIncludesName(control)}),
+        email: (): Validator => ({isIncludesEmail: FormValidators.includesEmail(control)})
       }
 
-      return null;
+      return validators[inputName]()
     };
   }
 
@@ -79,9 +78,10 @@ export class FormValidators {
     let isIncludesName = false;
 
     if (name) {
-      FormValidators.getNameLikeArray(name).forEach((name) => {
-        isIncludesName = isIncludesName ? true : control.value.toLowerCase().includes(name.toLowerCase());
-      });
+      const nameLikeArray = FormValidators.getNameLikeArray(name)
+      const inputValLower = control.value.toLowerCase()
+
+      isIncludesName = nameLikeArray.some((word: string) => inputValLower.includes(word.toLowerCase()))
     }
 
     return isIncludesName;
@@ -89,14 +89,14 @@ export class FormValidators {
 
   static includesEmail(control: any): boolean {
     const email = control.parent?.controls.email.value;
-    const isIncludesEmail = email ? control.value?.toLowerCase().includes(email.split('@')[0].toLowerCase()) : false;
+    const firstPartEmailLower = email?.split('@')[0].toLowerCase()
+    const isIncludesEmail = email ? control.value?.toLowerCase().includes(firstPartEmailLower) : false;
 
     return isIncludesEmail;
   }
 
   static getNameLikeArray(name: string): Array<string> {
     let nameSplit: string[];
-
     if (name.includes('-')) {
       nameSplit = name.split('-');
     } else if (name.trim().includes(' ')) {

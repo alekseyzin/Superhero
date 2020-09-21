@@ -6,9 +6,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./result-modal.component.scss']
 })
 export class ResultModalComponent implements OnInit {
-  @Output() onCloseModal: EventEmitter<boolean> = new EventEmitter<boolean>()
   @Input() message: string
   @Input() loader: boolean
+  @Output() onCloseModal: EventEmitter<boolean> = new EventEmitter<boolean>()
+
 
   constructor() { }
 

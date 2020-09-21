@@ -81,5 +81,7 @@ export interface History {
   heroId: string
   opponent: string
   opponentId: string
-  result: 'won' | 'lost' | 'draw'
+  result: BattleResult
 }
+
+export type BattleResult = 'won' | 'lost' | 'draw'
