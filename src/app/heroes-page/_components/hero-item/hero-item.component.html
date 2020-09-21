@@ -1,0 +1,33 @@
+<div
+  [ngClass]="{lastHero: isLastHero}"
+  class="card heroes-card">
+  <div class="avatar-wrapper">
+    <img src="{{ hero.image.url }}" alt="{{ hero.name }}">
+  </div>
+  <div class="content-wrapper">
+    <div class="content">
+      <h3><a [routerLink]="['/', 'hero', hero.id]">{{ hero.name }} {{ hero.id }}</a></h3>
+      <div class="stats">
+        <p>Combat: {{ hero.powerstats.combat }}</p>
+        <p>Durability: {{ hero.powerstats.durability }}</p>
+        <p>Intelligence: {{ hero.powerstats.intelligence }}</p>
+        <p>Power: {{ hero.powerstats.power }}</p>
+        <p>Speed: {{ hero.powerstats.speed }}</p>
+        <p>Strength: {{ hero.powerstats.strength }}</p>
+      </div>
+    </div>
+    <div class="options-wrapper">
+      <button
+        *ngIf="isFavorite; else notFavorite"
+        (click)="doUsual()"
+        class="btn btn-primary"
+      >remove</button>
+      <ng-template #notFavorite>
+        <button
+          (click)="doFavorite()"
+          class="btn btn-success"
+        >select</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

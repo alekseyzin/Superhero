@@ -1,0 +1,23 @@
+<div class="nav">
+  <a
+    class="btn btn-light"
+    [ngClass]="{active: currentTab === 'heroes'}"
+    (click)="clickHero()"
+  >Heroes list</a>
+  <a
+    class="btn btn-light"
+    [ngClass]="{active: currentTab === 'history'}"
+    (click)="clickHistory()"
+  >History</a>
+  <a
+    class="btn btn-light"
+    [ngClass]="{active: currentTab === 'power'}"
+    (click)="clickPower()"
+  >Power ups</a>
+</div>
+
+<app-favorites-heroes *ngIf="currentTab === 'heroes'"></app-favorites-heroes>
+
+<app-history-tab *ngIf="currentTab === 'history'"></app-history-tab>
+
+<app-power-tab *ngIf="currentTab === 'power'"></app-power-tab>

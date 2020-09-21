@@ -1,0 +1,53 @@
+<div class="hero-wrapper">
+  <div class="logo-wrapper">
+    <img src="{{ hero.image.url }}" alt="{{ hero.name }}">
+  </div>
+  <div class="content-wrapper">
+    <h1>{{ hero.name }}</h1>
+    <div class="content">
+
+      <div class="powerstats col">
+        <h3>Powerstats:</h3>
+        <p><span>Combat: </span> {{ hero.powerstats.combat }}</p>
+        <p><span>Durability: </span> {{ hero.powerstats.durability }}</p>
+        <p><span>Intelligence: </span> {{ hero.powerstats.intelligence }}</p>
+        <p><span>Power: </span> {{ hero.powerstats.power }}</p>
+        <p><span>Speed: </span> {{ hero.powerstats.speed }}</p>
+        <p><span>Strength: </span> {{ hero.powerstats.strength }}</p>
+      </div>
+
+      <div class="appearance col">
+        <h3>Appearance</h3>
+        <p><span>Eye-color: </span> {{ hero.appearance["eye-color"] }}</p>
+        <p><span>Gender: </span>{{ hero.appearance.gender }}</p>
+        <p><span>Height: </span>{{ hero.appearance.height[1] }}</p>
+        <p><span>Race: </span>{{ hero.appearance.race }}</p>
+        <p><span>Hair-color: </span>{{ hero.appearance["hair-color"] }}</p>
+        <p><span>Weight: </span>{{ hero.appearance.weight[1] }}</p>
+      </div>
+
+      <div class="biography col">
+        <h3>Biography</h3>
+        <p><span>Aliases: </span>{{ hero.biography.aliases }}</p>
+        <p><span>Alignment: </span>{{ hero.biography.alignment }}</p>
+        <p><span>Publisher: </span>{{ hero.biography.publisher }}</p>
+        <p><span>Alter-egos: </span>{{ hero.biography["alter-egos"] }}</p>
+        <p><span>First-appearance: </span>{{ hero.biography["first-appearance"] }}</p>
+        <p><span>Full-name: </span>{{ hero.biography["full-name"] }}</p>
+        <p><span>Place-of-birth: </span>{{ hero.biography["place-of-birth"] }}</p>
+      </div>
+
+      <div class="connections col">
+        <h3>Connections</h3>
+        <p><span>Relatives: </span>{{ hero.connections.relatives }}</p>
+        <p><span>Group-affiliation: </span>{{ hero.connections["group-affiliation"] }}</p>
+      </div>
+
+      <div class="work col">
+        <h3>Work</h3>
+        <p><span>Base: </span>{{ hero.work.base }}</p>
+        <p><span>Occupation: </span>{{ hero.work.occupation }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="content">
+  <app-hero-block [hero]="myHero"></app-hero-block>
+
+  <div class="control-wrapper">
+    <div class="start-wrapper">
+      <h3>{{ myHero.name }}</h3>
+      <button
+        (click)="startFight()"
+        class="btn btn-primary">Start</button>
+      <h3>{{ opponentHero.name }}</h3>
+    </div>
+    <div class="powerups-wrapper">
+     <app-battle-powerup
+       class="powerup"
+       *ngFor="let powerup of powerups"
+        [powerup]="powerup"
+       (click)="selectPowerup(powerup.id)"
+       [ngClass]="{checked: powerup.checked}"
+     ></app-battle-powerup>
+    </div>
+  </div>
+
+  <app-hero-block [hero]="opponentHero"></app-hero-block>
+
+  <app-result-modal
+    *ngIf="isModalOpen"
+    (onCloseModal)="closeModal($event)"
+    [message]="message"
+    [loader]="loader"
+  ></app-result-modal>
+</div>

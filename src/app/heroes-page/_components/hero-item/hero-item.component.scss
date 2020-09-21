@@ -1,0 +1,29 @@
+.card.heroes-card {
+
+  &.lastHero {
+    background-color: #28a745;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    //position: fixed;
+    //bottom: 5px;
+    //width: 953px;
+  }
+
+  .content-wrapper {
+
+    .stats {
+      max-height: 100px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      p {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .options-wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+}

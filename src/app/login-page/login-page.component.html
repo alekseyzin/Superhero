@@ -1,0 +1,38 @@
+<form class="card auth-form" [formGroup]="form" (ngSubmit)="sabmit()">
+  <h2>Login page</h2>
+
+  <div
+    *ngIf="message"
+    class="alert alert-danger">
+    {{message}}
+  </div>
+
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email">
+    <div
+      *ngIf="isInvalidInput('email')"
+      class="validation">
+      <small *ngIf="isInputEmpty('email')">Email is empty.</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+    <div
+      *ngIf="isInvalidInput('password')"
+      class="validation">
+      <small *ngIf="isInputEmpty('password')">Password is empty</small>
+    </div>
+  </div>
+  <button
+    [disabled]="form.invalid || submitted"
+    type="submit"
+    class="btn btn-success"
+  >Sing in</button>
+  <button
+    class="btn btn-dark"
+    (click)="goRegistrationPage()"
+  >Create new account</button>
+</form>

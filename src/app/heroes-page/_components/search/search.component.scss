@@ -1,0 +1,14 @@
+.bth-search {
+  position: absolute;
+  right: 0.5rem;
+  top: 2px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+  font-size: 21px;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
